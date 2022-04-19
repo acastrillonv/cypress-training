@@ -1,20 +1,39 @@
+import {
+  MenuContentPage, ProductsListPage, ShopingCartPage, LoginPage,
+  AddressStepPage,
+  ShippingStepPage,
+  PaymentStepPage,
+} from "../page/index";
+
+const menuContentPage = new MenuContentPage();
+const productsListPage = new ProductsListPage();
+const shopingCartPage = new ShopingCartPage();
+const loginPage = new LoginPage();
+const addressStepPage = new AddressStepPage();
+const shippingStepPage = new ShippingStepPage();
+const paymentStepPage = new PaymentStepPage();
+
 describe("Buy a t-shirt", () => {
-  it("then the t-shirt should be bought", () => {
-    cy.visit("http://automationpractice.com/");
-    cy.get("#block_top_menu > ul > li:nth-child(3) > a").click();
-    cy.get("#center_column a.button.ajax_add_to_cart_button.btn.btn-default").click();
-    cy.get("[style*=\"display: block;\"] .button-container > a").click();
-    cy.get(".cart_navigation span").click();
+  it("then should be bought a t-shirt", () => {
+    menuContentPage.visitMenuContentPage();
+    menuContentPage.goToTShirtMenu();
 
-    cy.get("#email").type("aperdomobo@gmail.com");
-    cy.get("#passwd").type("WorkshopProtractor");
+    productsListPage.clickAddToCart();
+    productsListPage.clickProceedeToCheckout();
 
-    cy.get("#SubmitLogin").click();
-    cy.get("#center_column > form > p > button").click();
-    cy.get("#cgv").click();
-    cy.get("#form > p > button").click();
-    cy.get("#HOOK_PAYMENT > div:nth-child(1) > div > p > a").click();
-    cy.get("#cart_navigation > button").click();
+    shopingCartPage.clickProceedeToCheckout();
+
+    loginPage.enterEmail();
+    loginPage.enterPasswd();
+    loginPage.submitLogin();
+
+    addressStepPage.clickProceedeToCheckout();
+
+    shippingStepPage.clickAgreeTerms();
+    shippingStepPage.clickProceedeToCheckout();
+
+    paymentStepPage.payByBankWire();
+    paymentStepPage.confirmOrder();
 
     // Debes completar la prueba ... implementa los pasos 8 al 13, del proceso de compra
 
