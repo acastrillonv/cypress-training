@@ -35,8 +35,6 @@ describe("Buy a t-shirt", () => {
     paymentStepPage.payByBankWire();
     paymentStepPage.confirmOrder();
 
-    // Debes completar la prueba ... implementa los pasos 8 al 13, del proceso de compra
-
     cy.get("#center_column > div > p > strong")
       .should("have.text", "Your order on My Store is complete.");
   });
